@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>기본 페이지</title>
+<title>기본 페이지...</title>
 </head>
 <body>
 
