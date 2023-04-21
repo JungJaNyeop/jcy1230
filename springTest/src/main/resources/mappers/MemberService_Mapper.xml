@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- method 만드는 곳 -->
+<mapper namespace="com.myezen.myapp.persistance.MemberService_Mapper">
+
+<!-- 회원 가입 쿼리 -->
+<insert id="memberInsert" parameterType="mv"><!-- id : 메소드 이름 / mv : com.myezen.myapp.domain.MemberVo -->
+	INSERT INTO member1230(midx,memberId,memberPwd,memberName,memberPhone,memberEmail,memberGender,memberAddr,memberBirth)
+	VALUES(midx_seq.NEXTVAL,#{memberid},#{memberpwd},#{membername},#{memberphone},#{memberemail},#{membergender},#{memberaddr},#{memberbirth})
+</insert>		   <!-- #{MemberVo에 작성된대로 입력} -->
+
+<!-- 전체목록 보기 쿼리 -->
+<select id="memberList" resultType="mv"><!-- 값을 mv로 받음 -->
+	select midx, memberid, membername, delyn, writeday from member1230 order by midx desc
+</select>
+
+<!-- id 중복체크 쿼리 -->
+<select id="memberIdCheck" parameterType="String" resultType="int"><!-- 값이 하나면 parameterType 지정가능 -->
+	select count(*) as cnt from member1230 where memberid = #{memberid}
+</select>
+
+<!-- 로그인 쿼리 -->
+<select id="memberLogin" parameterType="String" resultType="mv">
+	select * from member1230 where delyn='N' and memberid=#{memberid}
+</select>									<!-- db에 담긴 값 = input에 들어온 값 -->
+
+</mapper>
